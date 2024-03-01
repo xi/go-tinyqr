@@ -2,6 +2,8 @@ package qrcode
 
 import "log"
 
+type gfElement uint8
+
 const (
 	gfZero = gfElement(0)
 	gfOne  = gfElement(1)
@@ -65,7 +67,13 @@ var (
 		244, 234, 168, 80, 88, 175}
 )
 
-type gfElement uint8
+func gfInverse(a gfElement) gfElement {
+	if a == gfZero {
+		log.Panicln("No multiplicative inverse of 0")
+	}
+
+	return gfExpTable[255 - gfLogTable[a]]
+}
 
 func gfMultiply(a, b gfElement) gfElement {
 	if a == gfZero || b == gfZero {
@@ -83,12 +91,4 @@ func gfDivide(a, b gfElement) gfElement {
 	}
 
 	return gfMultiply(a, gfInverse(b))
-}
-
-func gfInverse(a gfElement) gfElement {
-	if a == gfZero {
-		log.Panicln("No multiplicative inverse of 0")
-	}
-
-	return gfExpTable[255 - gfLogTable[a]]
 }
