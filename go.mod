@@ -1,3 +1,3 @@
-module github.com/skip2/go-qrcode
+module github.com/xi/go-tinyqr
 
 go 1.13
