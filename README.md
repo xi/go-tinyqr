@@ -17,6 +17,11 @@ Still, generating QR codes stays complex. I had hoped that I can reduce this
 down to a small library that can just be copied to a new project. But it is
 still ~1000 loc.
 
+I did not remove support for different versions (sizes). Concentrating on a
+single version would have similar benefits to the other optimizations in terms
+of size, but I feel that the loss of flexibility would be much more relevant in
+this case.
+
 ## Reduction in code size
 
 | file       |  old | new | diff |
