@@ -17,6 +17,25 @@ Still, generating QR codes stays complex. I had hoped that I can reduce this
 down to a small library that can just be copied to a new project. But it is
 still ~1000 loc.
 
+## Reduction in code size
+
+| file       |  old | new | diff |
+| ---------- | ---: | --: | ---: |
+| gf.go      |   92 |  83 | -10% |
+| ecc.go     |  177 | 102 | -42% |
+| bitset.go  |  174 |  22 | -87% |
+| version.go | 2927 | 416 | -86% |
+| render.go  |  439 | 147 | -67% |
+| qrcode.go  |  649 | 119 | -82% |
+| **total**  | 4528 | 902 | -80% |
+
+This table compares b6ab6a4 (old) and f88a46e (new). The numbers were measured
+using `sloc`. In cases where I combined files I added up the line counts of the
+old files.
+
+The biggest single change is that I was able to remove ~2000 lines of version
+information for error correction levels that I didn't use.
+
 ## Links
 
 - [ISO/IEC 18004:2006](http://www.iso.org/iso/catalogue_detail.htm?csnumber=43655)
