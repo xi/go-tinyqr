@@ -127,17 +127,27 @@ func terminal(b *bitmap, padding int) string {
 }
 
 func Print(content string) error {
+	output, err := GetString(content)
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Print(output)
+	return nil
+}
+
+func GetString(content string) (string, error) {
 	bytes := []byte(content)
 
 	version := getVersion(bytes)
 	if version == nil {
-		return errors.New("content too long to encode")
+		return "", errors.New("content too long to encode")
 	}
 
 	encodedContent := encodeContent(bytes, version)
 	encodedBlocks := encodeBlocks(encodedContent, version)
 	bitmap := render(encodedBlocks, version)
 
-	fmt.Print(terminal(bitmap, 2))
-	return nil
+	return terminal(bitmap, 2), nil
 }

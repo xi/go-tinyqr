@@ -1,3 +1,3 @@
-module github.com/xi/go-tinyqr
+module github.com/algorandfoundation/go-tinyqr
 
 go 1.13
